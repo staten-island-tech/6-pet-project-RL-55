@@ -1,4 +1,5 @@
 import random
+Alive=True
 class Agent:
     def __init__(self,name,health,sanity):
         self.name=name
@@ -10,21 +11,21 @@ class Agent:
     def speffect(self,effect):
         self.__sp+=effect
         print(f"{self.name} has gained {effect} sanity.")
+    def alive(self):
+        if self.__sp<=-45:
+            self.__hp-150
+            print(f"{name} distorted.,{name} has taken 150 damage.")
+        if self.__hp<=0:
+            print(f"{name} has died.")
+            
     def status(self):
         print(f"{self.name}'s health is {self.__hp} and sanity is {self.__sp}.")
 name=input("Name your agent. ")
 health=random.randint(80,150)
-Alive=True
+
 Nugget=Agent(name,health,0)
 while Alive==True:
-    if Agent(Nugget.__sp)<=-45:
-        print(f"{name} has distorted.")
-        rand=random.randint(100,200)
-        Agent.hpeffect(Nugget,rand)
-        Agent.speffect(Nugget,45)
-    if Agent.__hp<=0:
-        Alive=False
-        print(f"{name} has died.")
+    Agent.alive(Nugget)
 
     Stage=(input("Continue on or pause. ")).lower()
     if Stage=="continue":
@@ -33,10 +34,10 @@ while Alive==True:
             print(f"{name} has encounter a abnormality.")
             action=(input("Fight or Flight ")).lower()
             if action=="fight":
-                rand=random.randint(-1,-150)
+                rand=random.randint(-150,-1)
                 Agent.hpeffect(Nugget,rand)
             elif action=="flight":
-                rand=random.randint(-1,-45)
+                rand=random.randint(-45,-1)
                 Agent.speffect(Nugget,rand)
             else:
                 print("Command not understood.")
