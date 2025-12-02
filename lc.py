@@ -10,23 +10,23 @@ class Agent:
         print(f"{self.name} has gained {effect} health.")
     def speffect(self,effect):
         self.__sp+=effect
-        print(f"{self.name} has gained {effect} sanity.")
+        print(f"{self.name} has gained {effect} sanity.")  
     def alive(self):
         if self.__sp<=-45:
             self.__hp-150
             print(f"{name} distorted.,{name} has taken 150 damage.")
         if self.__hp<=0:
             print(f"{name} has died.")
-            
+            return 
     def status(self):
         print(f"{self.name}'s health is {self.__hp} and sanity is {self.__sp}.")
 name=input("Name your agent. ")
 health=random.randint(80,150)
-
 Nugget=Agent(name,health,0)
-while Alive==True:
-    Agent.alive(Nugget)
+Agent.play(Nugget)
 
+while ==True:
+    Agent.alive(Nugget)
     Stage=(input("Continue on or pause. ")).lower()
     if Stage=="continue":
         event=1
