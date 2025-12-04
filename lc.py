@@ -1,5 +1,4 @@
 import random
-i=1
 class Agent:
     def __init__(self,name,health,sanity,enkephalin):
         self.name=name
@@ -106,29 +105,41 @@ class Agent:
         else:
             print("Not understood ALPH selected.")
             Agent.speffect(Nugget,-45)
+    def carmen(self):
+        print(f"{name} hear a mysterious voice. ")
+        action=input((f"Does {name} listen or not?")).lower
+        if action=="listen":
+            self.__hp-=150
+            print(f"{name} distorted.,{name} has taken 150 damage.")
+            self.__sp=0
+        elif action=="don't" or action=="dont" or action=="no" or action=="not":
+            print(f"{name} reinforced their resolve.")
+            Agent.hpeffect(Nugget,self.__hp*2)
     def score(self):
         print(self.__ek)
     def play(self):
         while self.__hp>0:
-            print(f"Day {i}")
             Agent.alive(Nugget)
             Stage=(input("Continue on or pause. ")).lower()
             if Stage=="continue" or Stage=="c" or Stage=="continue on":
-                i+=1
-                event=random.randint(1,5)
-                if event==1:
+                event=random.randint(1,36)
+                if 5>=event>=1:
                     Agent.battle(Nugget)
-                elif event==2:
+                elif 15>=event>=6:
                     Agent.extraction(Nugget)
-                elif event==3:
+                elif 20>=event>=16:
                     Agent.rest(Nugget)
-                elif event==4:
+                elif 25>=event>=21:
                     Agent.egogear(Nugget)
-                elif event==5:
+                elif 35>=event>=26:
                     Agent.spextraction(Nugget)
-                else:
-                    print("You took a quick break.")
-                    Agent.status(Nugget)
+                elif event==36:
+                    Agent.carmen(Nugget)
+                elif event==37:
+                    input(f"{name} has recieve a fancy invitation to a library. Accept or decline. ")
+            else:
+                print("You took a quick break.")
+                Agent.status(Nugget)
             Agent.alive(Nugget)
         Agent.score(Nugget)
 
