@@ -115,14 +115,27 @@ class Agent:
         elif action=="don't" or action=="dont" or action=="no" or action=="not":
             print(f"{name} reinforced their resolve.")
             Agent.hpeffect(Nugget,self.__hp*2)
+    def invite(self):
+        action=(input(f"{name} has recieve a fancy invitation to a library. Accept or decline.")).lower
+        if action=="accept":
+            rand=random.randint(1,2)
+            if rand==1:
+                print(f"{name} has accepted the invitation.")
+                Agent.hpeffect(Nugget,-999)
+            else:
+                print(f"{name} has decided not to go.")
+        else:
+            print(f"{name} refused the request.")
     def score(self):
         print(self.__ek)
     def play(self):
         while self.__hp>0:
             Agent.alive(Nugget)
+            print(f"Day {day}")
             Stage=(input("Continue on or pause. ")).lower()
             if Stage=="continue" or Stage=="c" or Stage=="continue on":
-                event=random.randint(1,36)
+                day+=1
+                event=random.randint(1,37)
                 if 5>=event>=1:
                     Agent.battle(Nugget)
                 elif 15>=event>=6:
@@ -136,7 +149,7 @@ class Agent:
                 elif event==36:
                     Agent.carmen(Nugget)
                 elif event==37:
-                    input(f"{name} has recieve a fancy invitation to a library. Accept or decline. ")
+                    Agent.invite(Nugget)
             else:
                 print("You took a quick break.")
                 Agent.status(Nugget)
