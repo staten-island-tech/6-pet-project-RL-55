@@ -129,7 +129,8 @@ class Agent:
     def score(self):
         print(self.__ek)
     def play(self):
-        while self.__hp>0:
+        day=40
+        while self.__hp>0 and day<50:
             Agent.alive(Nugget)
             print(f"Day {day}")
             Stage=(input("Continue on or pause. ")).lower()
