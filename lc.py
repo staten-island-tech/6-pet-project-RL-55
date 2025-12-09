@@ -7,21 +7,19 @@ class Agent:
         self.__sp=sanity
     def hpeffect(self,effect):
         self.__hp+=effect
-        print(f"{self.name} inflicted {effect} health.")
+        print(f"{self.name} health has changed by {effect}.")
     def speffect(self,effect):
         self.__sp+=effect
         if self.__sp>45:
             self.__sp=45
-        print(f"{self.name} inflicted {effect} sanity.")  
+        print(f"{self.name} sanity has changed by {effect}.")  
     def ekeffect(self,effect):
         self.__ek+=effect
-    def alive(self):
+    def corrode(self):
         if self.__sp<=-45:
             self.__hp-=150
-            print(f"{name} distorted.,{name} has taken 150 damage.")
+            print(f"{name} distorted. {name} has taken 150 damage.")
             self.__sp=0
-        elif self.__hp<=0:
-            print(f"{name} is died.")
     def status(self):
         print(f"{self.name}'s health is {self.__hp} and sanity is {self.__sp}.")
     def battle(self):
@@ -106,8 +104,8 @@ class Agent:
             print("Not understood ALPH selected.")
             Agent.speffect(Nugget,-45)
     def carmen(self):
-        print(f"{name} hear a mysterious voice. ")
-        action=input((f"Does {name} listen or not?")).lower
+        print(f"{name} hear a mysterious voice.")
+        action=input((f"Does {name} listen or not? ")).lower
         if action=="listen":
             self.__hp-=150
             print(f"{name} distorted.,{name} has taken 150 damage.")
@@ -115,6 +113,10 @@ class Agent:
         elif action=="don't" or action=="dont" or action=="no" or action=="not":
             print(f"{name} reinforced their resolve.")
             Agent.hpeffect(Nugget,self.__hp*2)
+        else:
+            print(f"{name} hides from the truth.")
+            Agent.hpeffect(Nugget,self.__hp*2)
+            Agent.speffect(Nugget,-45)
     def invite(self):
         action=(input(f"{name} has recieve a fancy invitation to a library. Accept or decline.")).lower
         if action=="accept":
@@ -129,34 +131,37 @@ class Agent:
     def score(self):
         print(self.__ek)
     def play(self):
-        day=40
+        day=1
         while self.__hp>0 and day<50:
-            Agent.alive(Nugget)
             print(f"Day {day}")
             Stage=(input("Continue on or pause. ")).lower()
             if Stage=="continue" or Stage=="c" or Stage=="continue on":
                 day+=1
                 event=random.randint(1,37)
-                if 5>=event>=1:
+                if 10>=event>=1:
                     Agent.battle(Nugget)
-                elif 15>=event>=6:
+                elif 21>=event>=11:
                     Agent.extraction(Nugget)
-                elif 20>=event>=16:
-                    Agent.rest(Nugget)
                 elif 25>=event>=21:
+                    Agent.rest(Nugget)
+                elif 30>=event>=26:
                     Agent.egogear(Nugget)
-                elif 35>=event>=26:
+                elif 40>=event>=31:
                     Agent.spextraction(Nugget)
-                elif event==36:
+                elif event==41:
                     Agent.carmen(Nugget)
-                elif event==37:
+                elif event==42:
                     Agent.invite(Nugget)
             else:
                 print("You took a quick break.")
                 Agent.status(Nugget)
-            Agent.alive(Nugget)
-        Agent.score(Nugget)
-
+            Agent.corrode(Nugget)
+        if day>=50:
+            print(f"{name}'s facility was engulfed by light.")
+            Agent.score(Nugget)
+        else:
+            print(f"{name} has died.")
+            Agent.score(Nugget)
 name=input("Name your agent. ")
 health=random.randint(80,150)
 Nugget=Agent(name,health,0,0)
