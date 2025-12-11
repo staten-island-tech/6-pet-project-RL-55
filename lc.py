@@ -101,9 +101,9 @@ class Agent:
             Agent.speffect(Nugget,-45)
             Agent.ekeffect(Nugget,25)
         else:
-            print("Not understood ALPH selected.")
+            print("Not understood. ALPH selected.")
             Agent.speffect(Nugget,-45)
-    def carmen(self):
+    def c(self):
         print(f"{name} hear a mysterious voice.")
         action=input((f"Does {name} listen or not? ")).lower
         if action=="listen":
@@ -132,6 +132,8 @@ class Agent:
         print(self.__ek)
     def play(self):
         day=1
+        x=input("Press enter to continue")
+        x=input("Warning take notes")
         while self.__hp>0 and day<50:
             print(f"Day {day}")
             Stage=(input("Continue on or pause. ")).lower()
@@ -149,7 +151,7 @@ class Agent:
                 elif 40>=event>=31:
                     Agent.spextraction(Nugget)
                 elif event==41:
-                    Agent.carmen(Nugget)
+                    Agent.c(Nugget)
                 elif event==42:
                     Agent.invite(Nugget)
             else:
